@@ -26,8 +26,7 @@ public class ImprovedPlayerMovement : MonoBehaviour
     [SerializeField] private float coyoteTime = 0.1f; // Define el tiempo coyote en segundos
     private float coyoteTimeCounter;
 
-    [Header("Time Between Jumps")]
-    [SerializeField] [Range(0f, 1f)] private float timeBetweenJumps = 0.5f; // Nuevo parámetro de tiempo entre saltos
+    private float timeBetweenJumps = 0.5f; // Nuevo parámetro de tiempo entre saltos
 
     private Transform cameraContainer;
     private CharacterController characterController;
@@ -37,7 +36,8 @@ public class ImprovedPlayerMovement : MonoBehaviour
     private Vector2 inputVectorLook;
     private Vector3 forwardDirection;
     private Vector3 rightDirection;
-
+    private Vector3 movementVector;
+    
     private void Start()
     {
         cameraContainer = transform.GetChild(0);
@@ -94,32 +94,31 @@ public class ImprovedPlayerMovement : MonoBehaviour
         forwardDirection = transform.forward;
         rightDirection = transform.right;
 
-        var movementDirectionY = moveDirection.y;
+        float movementDirectionY = moveDirection.y;
 
-        var movementVector = inputVectorMovement * playerCurrentSpeed;
+        movementVector = inputVectorMovement * playerCurrentSpeed;
 
         moveDirection = (forwardDirection * movementVector.y) + (rightDirection * movementVector.x);
 
         moveDirection.y = movementDirectionY;
 
-        // Aplicar la fuerza de salto si el jugador está en el suelo o en el tiempo coyote y se ha pasado el tiempo entre saltos
-        if ((isGrounded || coyoteTimeCounter > 0) && Input.GetButton("Jump") && timeBetweenJumps <= 0)
+        if ((isGrounded || coyoteTimeCounter > 0) && timeBetweenJumps <= 0)
         {
-            moveDirection.y = jumpForce;
-            coyoteTimeCounter = 0;
-            timeBetweenJumps = 1f; // Reiniciar el tiempo entre saltos
+            if (Input.GetButton("Jump") && isGrounded)
+            {
+                moveDirection.y = jumpForce;
+                coyoteTimeCounter = 0;
+                timeBetweenJumps = 1f; // Reiniciar el tiempo entre saltos
+            }
         }
         else
         {
             moveDirection.y += gravityMultiplier * Physics.gravity.y * Time.deltaTime;
         }
-
-        // Reducir el tiempo entre saltos
         if (timeBetweenJumps > 0)
         {
             timeBetweenJumps -= Time.deltaTime;
         }
-
         characterController.Move(moveDirection * Time.deltaTime);
     }
 

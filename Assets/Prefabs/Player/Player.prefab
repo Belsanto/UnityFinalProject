@@ -264,7 +264,7 @@ CharacterController:
   m_Height: 1.7
   m_Radius: 0.3
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.5
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.85, z: 0}
@@ -280,8 +280,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c378ae2c11237454ba31080d625f18b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingSpeed: 4
-  runningSpeed: 10
+  walkingSpeed: 2.4
+  runningSpeed: 3.2
   lookSensitivity: 2
   jumpForce: 2.5
   gravityMultiplier: 1
@@ -290,6 +290,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   coyoteTime: 0.3
+  timeBetweenJumps: 0.5
 --- !u!1 &8218936723295448772
 GameObject:
   m_ObjectHideFlags: 0
