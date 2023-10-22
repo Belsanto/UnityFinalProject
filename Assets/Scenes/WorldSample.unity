@@ -437,15 +437,15 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3.8
+  m_Color: {r: 0.7169812, g: 0.7164225, b: 0.7068352, a: 1}
+  m_Intensity: 3
   m_Range: 10
   m_SpotAngle: 80
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
-    m_Resolution: -1
+    m_Resolution: 0
     m_CustomResolution: -1
     m_Strength: 1
     m_Bias: 0.05
@@ -500,12 +500,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618f30733b362e94281e63d841df7b22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDuration: 50
-  minDuration: 10
-  minRange: 50
-  maxRange: 80
-  minIntensity: 2
+  maxDuration: 17
+  minDuration: 7
+  minIntensity: 1.5
   maxIntensity: 3
+  minSpotAngle: 50
+  maxSpotAngle: 80
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
