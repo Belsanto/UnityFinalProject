@@ -79,7 +79,8 @@ public class FlashlightController : MonoBehaviour
     {
         if (isOn)
         {
-            flashlight.intensity = maxIntensity;
+            currentIntensity = Mathf.Lerp(minIntensity, maxIntensity, maxDuration / minDuration);
+            flashlight.intensity = currentIntensity;
             flashlight.spotAngle = maxSpotAngle;
             flashlight.enabled = true;
         }
