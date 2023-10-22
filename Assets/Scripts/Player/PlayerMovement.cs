@@ -6,17 +6,17 @@ using UnityEngine;
 public class ImprovedPlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField][Range(0f, 10f)] private float walkingSpeed = 7.5f;
-    [SerializeField][Range(0f, 12f)] private float runningSpeed = 11.5f;
+    [SerializeField] [Range(0f, 10f)] private float walkingSpeed = 7.5f;
+    [SerializeField] [Range(0f, 12f)] private float runningSpeed = 11.5f;
     private float playerCurrentSpeed;
 
     [Header("Look")]
-    [SerializeField][Range(0f, 10f)] private float lookSensitivity = 2f;
+    [SerializeField] [Range(0f, 10f)] private float lookSensitivity = 2f;
     private float lookVerticalMaxAngle = 90f;
     private float rotationX = 0;
 
     [Header("Jump")]
-    [SerializeField][Range(0f, 15f)] private float jumpForce = 6f;
+    [SerializeField] [Range(0f, 15f)] private float jumpForce = 6f;
     [SerializeField] private float gravityMultiplier = 1f;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundMask;
@@ -26,6 +26,8 @@ public class ImprovedPlayerMovement : MonoBehaviour
     [SerializeField] private float coyoteTime = 0.1f; // Define el tiempo coyote en segundos
     private float coyoteTimeCounter;
 
+    private float timeBetweenJumps = 0.5f; // Nuevo parámetro de tiempo entre saltos
+
     private Transform cameraContainer;
     private CharacterController characterController;
 
@@ -34,7 +36,8 @@ public class ImprovedPlayerMovement : MonoBehaviour
     private Vector2 inputVectorLook;
     private Vector3 forwardDirection;
     private Vector3 rightDirection;
-
+    private Vector3 movementVector;
+    
     private void Start()
     {
         cameraContainer = transform.GetChild(0);
@@ -91,25 +94,31 @@ public class ImprovedPlayerMovement : MonoBehaviour
         forwardDirection = transform.forward;
         rightDirection = transform.right;
 
-        var movementDirectionY = moveDirection.y;
+        float movementDirectionY = moveDirection.y;
 
-        var movementVector = inputVectorMovement * playerCurrentSpeed;
+        movementVector = inputVectorMovement * playerCurrentSpeed;
 
         moveDirection = (forwardDirection * movementVector.y) + (rightDirection * movementVector.x);
 
         moveDirection.y = movementDirectionY;
 
-        // Aplicar la fuerza de salto si el jugador está en el suelo o en el tiempo coyote
-        if ((isGrounded || coyoteTimeCounter > 0) && Input.GetButton("Jump"))
+        if ((isGrounded || coyoteTimeCounter > 0) && timeBetweenJumps <= 0)
         {
-            moveDirection.y = jumpForce;
-            coyoteTimeCounter = 0;
+            if (Input.GetButton("Jump") && isGrounded)
+            {
+                moveDirection.y = jumpForce;
+                coyoteTimeCounter = 0;
+                timeBetweenJumps = 1f; // Reiniciar el tiempo entre saltos
+            }
         }
         else
         {
             moveDirection.y += gravityMultiplier * Physics.gravity.y * Time.deltaTime;
         }
-
+        if (timeBetweenJumps > 0)
+        {
+            timeBetweenJumps -= Time.deltaTime;
+        }
         characterController.Move(moveDirection * Time.deltaTime);
     }
 
