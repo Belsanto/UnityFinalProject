@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class FlashlightController : MonoBehaviour
 {
+    
     [SerializeField] private float maxDuration = 50f;
     [SerializeField] private float minDuration = 10f;
     [SerializeField] private float minIntensity = 2f;
