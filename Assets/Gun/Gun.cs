@@ -57,7 +57,9 @@ public class Gun : MonoBehaviour
     {
         currentAmmo--;
         nextFireTime = Time.time + fireRate;
+
         RaycastHit hit;
+
         gameObject.GetComponent<Animation>().Play("PistolGun");
 
         GameObject fireEffect = Instantiate(muzzleFireEffect, muzzlePoint.transform.position, Quaternion.Euler(180f, 0f, 0f)) as GameObject;
