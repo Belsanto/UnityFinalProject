@@ -336,6 +336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.8
   stoppingDistance: 2.5
+  canLookAt: 1
 --- !u!4 &63439729 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0300ddecc4cbe4d4eae107c18e7012f5, type: 3}
@@ -1203,6 +1204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.8
   stoppingDistance: 2.5
+  canLookAt: 1
 --- !u!4 &478310301 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0300ddecc4cbe4d4eae107c18e7012f5, type: 3}
@@ -3254,7 +3256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3994313521711306114, guid: 18569c74bfbd62c41b7b75f68e66dfb1, type: 3}
       propertyPath: stoppingDistance
-      value: 2.5
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3392,3 +3394,4 @@ SceneRoots:
   - {fileID: 1375151032}
   - {fileID: 1291977817}
   - {fileID: 742359624}
+  - {fileID: 1101456796}
