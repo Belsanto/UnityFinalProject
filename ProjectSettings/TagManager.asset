@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Card 1
-  - Reach
+  - Enemy
+  - Fire
+  - Door
   layers:
   - Default
   - TransparentFX
