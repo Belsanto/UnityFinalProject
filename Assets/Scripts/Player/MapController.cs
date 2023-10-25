@@ -4,7 +4,9 @@ using UnityEngine;
 public class MapController : MonoBehaviour
 {
     [SerializeField] private Camera miniMapCamera;
-
+    [SerializeField] private GameObject hud;
+    [SerializeField] private GameObject inv;
+    
     private void Start()
     {
         miniMapCamera.enabled = true;
@@ -17,5 +19,16 @@ public class MapController : MonoBehaviour
         {
             miniMapCamera.enabled = !miniMapCamera.enabled;
         }
+    }
+
+    private void OnEnable()
+    {
+        hud.SetActive(false);
+        inv.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        hud.SetActive(true);
     }
 }
