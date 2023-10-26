@@ -19,10 +19,10 @@ public class MainMenuController : MonoBehaviour
         if (mainMenuPanel != null) mainMenuPanel.SetActive(true);
 
         if (settingsPanel != null) settingsPanel.SetActive(false);
-        settingsPanel.transform.Translate(Vector3.down * 100);
+        settingsPanel.transform.Translate(Vector3.down * 1000);
 
         if (creditsPanel != null) creditsPanel.SetActive(false);
-        creditsPanel.transform.Translate(Vector3.down * 100);
+        creditsPanel.transform.Translate(Vector3.down * 1000);
 
     }
 
@@ -39,9 +39,12 @@ public class MainMenuController : MonoBehaviour
         if (canInteract)
         {
             canInteract = false;
-            mainMenuPanel.transform.DOMoveY(600f, 0.8f);
+            mainMenuPanel.transform.DOMoveY(2000f, 0.8f).OnComplete(() =>
+            {
+                mainMenuPanel.SetActive(false);
+            });
             if (settingsPanel != null) settingsPanel.SetActive(true);
-            settingsPanel.transform.DOMoveY(initialPosition.position.y + 50, 1f).OnComplete(() =>
+            settingsPanel.transform.DOMoveY(initialPosition.position.y + 90, 1f).OnComplete(() =>
             {
                 canInteract = true;
             });
@@ -55,9 +58,9 @@ public class MainMenuController : MonoBehaviour
         if (canInteract)
         {
             canInteract = false;
-            mainMenuPanel.transform.DOMoveY(600f, 0.8f);
+            mainMenuPanel.transform.DOMoveY(2000f, 0.8f);
             if (creditsPanel != null) creditsPanel.SetActive(true);
-            creditsPanel.transform.DOMoveY(initialPosition.position.y + 50, 1f).OnComplete(() =>
+            creditsPanel.transform.DOMoveY(initialPosition.position.y + 90, 1f).OnComplete(() =>
             {
                 canInteract = true;
             });
@@ -74,7 +77,6 @@ public class MainMenuController : MonoBehaviour
             {
                 settingsPanel.transform.DOMoveY(-600f, 1f).OnComplete(() =>
                 {
-                    settingsPanel.transform.Translate(0f, initialPosition.position.y, -2f);
                     settingsPanel.SetActive(false);
                 });
 
@@ -84,14 +86,13 @@ public class MainMenuController : MonoBehaviour
             {
                 creditsPanel.transform.DOMoveY(-600f, 1f).OnComplete(() =>
                 {
-                    creditsPanel.transform.Translate(0f, initialPosition.position.y, -2f);
                     creditsPanel.SetActive(false);
                 });
 
             }
 
             if (mainMenuPanel != null) mainMenuPanel.SetActive(true);
-            mainMenuPanel.transform.DOMoveY(initialPosition.position.y + 50, 1f).OnComplete(() =>
+            mainMenuPanel.transform.DOMoveY(initialPosition.position.y + 90, 1f).OnComplete(() =>
             {
                 canInteract = true;
             });
