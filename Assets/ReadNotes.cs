@@ -12,9 +12,9 @@ public class ReadNotes : MonoBehaviour
 
     [SerializeField] private GameObject noteUI;
     [SerializeField] private GameObject hud;
-    [SerializeField] private GameObject inv;
+    [SerializeField] private GameObject pause;
 
-    [SerializeField] private GameObject pickUpText;
+    [SerializeField] private GameObject interact;
 
     [SerializeField] private AudioSource pickUpSound;
     [SerializeField] private AudioSource dropSound;
@@ -26,8 +26,8 @@ public class ReadNotes : MonoBehaviour
     {
         noteUI.SetActive(false);
         hud.SetActive(true);
-        inv.SetActive(false);
-        pickUpText.SetActive(false);
+        pause.SetActive(false);
+        interact.SetActive(false);
         reading = false;
         inReach = false;
     }
@@ -37,7 +37,7 @@ public class ReadNotes : MonoBehaviour
         if (reading == false)
         {
             inReach = true;
-            pickUpText.SetActive(true);
+            interact.SetActive(true);
         }
     }
 
@@ -46,7 +46,7 @@ public class ReadNotes : MonoBehaviour
         if (reading == false)
         {
             inReach = false;
-            pickUpText.SetActive(false);
+            interact.SetActive(false);
         }
     }
 
@@ -54,11 +54,11 @@ public class ReadNotes : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && inReach && reading == false)
         {
-            pickUpText.SetActive(false);
+            interact.SetActive(false);
             noteUI.SetActive(true);
             pickUpSound.Play();
             hud.SetActive(false);
-            inv.SetActive(false);
+            pause.SetActive(false);
             StartCoroutine(CloseOpenNote(0.1f));
             if (!(selectedItem == ItemOptions.Note))
             {
@@ -75,7 +75,7 @@ public class ReadNotes : MonoBehaviour
             hud.SetActive(true);
             Time.timeScale = 1f;
             Cursor.lockState = CursorLockMode.Locked; // Bloquear el cursor en el centro de la pantalla
-            Cursor.visible = false; // Hacer el cursor invisible
+            Cursor.visible = false; // Hacer el cursor pauseisible
             // Encoger y destruir
             /* LeanTween.scale(gameObject, Vector3.zero, 0.5f).setOnComplete(() => {
                 Destroy(gameObject);
