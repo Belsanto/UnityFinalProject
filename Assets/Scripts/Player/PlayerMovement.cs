@@ -5,7 +5,7 @@ using UnityEngine;
 
 // Asegurarse de que el GameObject tenga un CharacterController adjunto
 [RequireComponent(typeof(CharacterController))]
-public class ImprovedPlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("Controls Enable")]
     [SerializeField] private bool isAbleToMove = true; // Duración máxima de la carrera
@@ -53,7 +53,11 @@ public class ImprovedPlayerMovement : MonoBehaviour
     private Vector3 forwardDirection;
     private Vector3 rightDirection;
     private Vector3 movementVector;
-    
+
+    public void SetIsAbleToLook(bool active)
+    {
+        isAbleToLook = active;
+    }
     // Método que se ejecuta al iniciar
     private void Start()
     {

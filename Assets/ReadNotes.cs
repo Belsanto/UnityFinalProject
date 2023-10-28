@@ -15,12 +15,14 @@ public class ReadNotes : MonoBehaviour
     [SerializeField] private GameObject pause;
 
     [SerializeField] private GameObject interact;
+    [SerializeField] private bool isWin;
 
     [SerializeField] private AudioSource pickUpSound;
     [SerializeField] private AudioSource dropSound;
 
     private bool inReach;
     private bool reading;
+    private PlayerMovement playerMovement;
 
     void Start()
     {
@@ -30,6 +32,7 @@ public class ReadNotes : MonoBehaviour
         interact.SetActive(false);
         reading = false;
         inReach = false;
+        playerMovement = FindObjectOfType<PlayerMovement>(); // referencia al script ImprovedPlayerMovement
     }
 
     void OnMouseEnter()
@@ -55,6 +58,7 @@ public class ReadNotes : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && inReach && reading == false)
         {
             interact.SetActive(false);
+            playerMovement.SetIsAbleToLook(false);
             noteUI.SetActive(true);
             pickUpSound.Play();
             hud.SetActive(false);
@@ -67,9 +71,10 @@ public class ReadNotes : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && inReach && Time.timeScale == 0 && reading)
+        if (Input.GetKeyDown(KeyCode.E) && inReach && Time.timeScale == 0 && reading && isWin == false)
         {
             reading = false;
+            playerMovement.SetIsAbleToLook(true);
             noteUI.SetActive(false);
             dropSound.Play();
             hud.SetActive(true);
@@ -92,6 +97,11 @@ public class ReadNotes : MonoBehaviour
         yield return new WaitForSeconds(time);
         reading = !reading;
         Time.timeScale = reading ? 0f : 1f;
-        Cursor.lockState = reading ? CursorLockMode.None : CursorLockMode.Locked;
+        if (isWin)
+        {
+            // Make the cursor visible and unlock it
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 }
