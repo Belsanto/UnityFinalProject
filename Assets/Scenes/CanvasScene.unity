@@ -296,6 +296,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5356367044834717081, guid: 275be57306d85a243a8f68ccef28abf5, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6131064361613988602, guid: 275be57306d85a243a8f68ccef28abf5, type: 3}
       propertyPath: m_Name
       value: Main Menu
@@ -339,6 +343,10 @@ PrefabInstance:
     - target: {fileID: 8353755085685987069, guid: 275be57306d85a243a8f68ccef28abf5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8609109421015320978, guid: 275be57306d85a243a8f68ccef28abf5, type: 3}
+      propertyPath: m_text
+      value: Horror Bunker Escape
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
