@@ -12,8 +12,6 @@ public class ReadNotes : MonoBehaviour
 
     [SerializeField] private GameObject noteUI;
     [SerializeField] private GameObject hud;
-    [SerializeField] private GameObject pause;
-
     [SerializeField] private GameObject interact;
     [SerializeField] private bool isWin;
 
@@ -28,7 +26,6 @@ public class ReadNotes : MonoBehaviour
     {
         noteUI.SetActive(false);
         hud.SetActive(true);
-        pause.SetActive(false);
         interact.SetActive(false);
         reading = false;
         inReach = false;
@@ -62,7 +59,6 @@ public class ReadNotes : MonoBehaviour
             noteUI.SetActive(true);
             pickUpSound.Play();
             hud.SetActive(false);
-            pause.SetActive(false);
             StartCoroutine(CloseOpenNote(0.1f));
             if (!(selectedItem == ItemOptions.Note))
             {
