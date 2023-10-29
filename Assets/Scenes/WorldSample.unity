@@ -12966,6 +12966,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 30.3417
       objectReference: {fileID: 0}
+    - target: {fileID: 2248956294417774433, guid: 808b7a9a5970539428ecdd380f6ca2a5, type: 3}
+      propertyPath: m_Name
+      value: Map Light
+      objectReference: {fileID: 0}
     - target: {fileID: 2359156253850577224, guid: 808b7a9a5970539428ecdd380f6ca2a5, type: 3}
       propertyPath: miniMapCamera
       value: 

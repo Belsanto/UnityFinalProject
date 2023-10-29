@@ -72,7 +72,7 @@ public class FlashlightController : MonoBehaviour
         else
         {
             if(currentDuration<= maxDuration)
-                currentDuration += Time.deltaTime;
+                currentDuration += Time.deltaTime*2;
         }
     }
 
