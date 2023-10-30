@@ -621,6 +621,7 @@ MonoBehaviour:
   hudCard: {fileID: 0}
   interact: {fileID: 899536143}
   isWin: 1
+  isNote: 0
   pickUpSound: {fileID: 34621743}
   dropSound: {fileID: 34621743}
 --- !u!65 &34621745
@@ -1339,6 +1340,7 @@ MonoBehaviour:
   hudCard: {fileID: 0}
   interact: {fileID: 899536143}
   isWin: 0
+  isNote: 1
   pickUpSound: {fileID: 96535879}
   dropSound: {fileID: 96535879}
 --- !u!82 &96535879
