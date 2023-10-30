@@ -81,7 +81,7 @@ public class ReadNotes : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && inReach && Time.timeScale == 0 && reading && isWin == false)
+        if (Input.GetKeyDown(KeyCode.E) && Time.timeScale == 0 && reading && isWin == false)
         {
             reading = false;
             playerMovement.SetIsAbleToLook(true);
