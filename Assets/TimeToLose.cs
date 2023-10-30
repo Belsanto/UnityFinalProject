@@ -9,7 +9,6 @@ public class TimeToLose : MonoBehaviour
     private float initialTime = 8.0f; // Tiempo inicial en minutos (ajusta el valor en el Inspector)
     private TextMeshProUGUI textMeshPro;
     
-     float startingTime = 180; // Rango de 3 a 8 minutos en segundos
     [SerializeField] 
     private GameObject endGameMenu; 
     public float currentTime { get; private set; }
@@ -35,7 +34,7 @@ public class TimeToLose : MonoBehaviour
             // El tiempo ha terminado, imprime un mensaje
             Debug.Log("¡Perdiste!");
             endGameMenu.SetActive(true);
-            endGameMenu.GetComponent<GameOverMenuController>().SetLoseScreen();
+            endGameMenu.GetComponent<MenuController>().SetLoseScreen();
             playerMovement.SetIsAbleToLook(false);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;

@@ -9,7 +9,6 @@ public class GateOpen : MonoBehaviour
     
     [Header("UI")]
     [SerializeField] private GameObject hud;
-    [SerializeField] private GameObject inv;
     [SerializeField] private GameObject pickUpText;
 
     
@@ -33,7 +32,6 @@ public class GateOpen : MonoBehaviour
     void Start()
     {
         hud.SetActive(true);
-        inv.SetActive(false);
         pickUpText.SetActive(false);
         inReach = false;
         doorOpen = false;

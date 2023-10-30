@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class PauseMenuController : MonoBehaviour
 {
     private bool isPaused = false;
-    public GameObject pauseMenu;
+    [SerializeField] private GameObject pauseMenu;
+    
 
     void Update()
     {
@@ -29,6 +30,9 @@ public class PauseMenuController : MonoBehaviour
         Time.timeScale = 0; // Pause the game time
         isPaused = true;
         pauseMenu.SetActive(true); // Show the pause menu (you need to set this in the Unity Inspector)
+        // Make the cursor visible and unlock it
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void ResumeGame()
@@ -36,6 +40,9 @@ public class PauseMenuController : MonoBehaviour
         Time.timeScale = 1; // Resume the game time
         isPaused = false;
         pauseMenu.SetActive(false); // Hide the pause menu
+        // Make the cursor visible and unlock it
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void ReturnToMainMenu()
