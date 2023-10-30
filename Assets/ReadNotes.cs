@@ -15,6 +15,7 @@ public class ReadNotes : MonoBehaviour
     [SerializeField] private GameObject hudCard;
     [SerializeField] private GameObject interact;
     [SerializeField] private bool isWin;
+    [SerializeField] private bool isNote;
 
     [SerializeField] private AudioSource pickUpSound;
     [SerializeField] private AudioSource dropSound;
@@ -87,7 +88,10 @@ public class ReadNotes : MonoBehaviour
             noteUI.SetActive(false);
             dropSound.Play();
             hud.SetActive(true);
-            hudCard.SetActive(true);
+            if (isNote == false)
+            {
+                hudCard.SetActive(true);
+            }
             Time.timeScale = 1f;
             Cursor.lockState = CursorLockMode.Locked; // Bloquear el cursor en el centro de la pantalla
             Cursor.visible = false; // Hacer el cursor pauseisible
