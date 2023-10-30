@@ -10,7 +10,11 @@ public class FlashlightController : MonoBehaviour
     [SerializeField] private float maxIntensity = 3f;
     [SerializeField] private float minSpotAngle = 50f;
     [SerializeField] private float maxSpotAngle = 80f;
-
+    [SerializeField] private AudioSource activeSound;
+    [SerializeField] private GameObject lightOn;
+    [SerializeField] private GameObject lightOff;
+    [SerializeField] private GameObject lightDisable;
+    
     private Light flashlight;
     private float currentDuration;
     private float currentIntensity;
@@ -22,6 +26,9 @@ public class FlashlightController : MonoBehaviour
         flashlight = GetComponent<Light>();
         currentDuration = maxDuration;
         SetLight();
+        lightOn.SetActive(false);
+        lightDisable.SetActive(false);
+        lightOff.SetActive(true);
     }
 
     private void Update()
@@ -31,6 +38,21 @@ public class FlashlightController : MonoBehaviour
             ToggleFlashlight();
         }
 
+        if (isOn == false)
+        {
+            if (currentDuration <= minDuration)
+            {
+                lightOn.SetActive(false);
+                lightDisable.SetActive(true);
+                lightOff.SetActive(false);
+            }
+            else
+            {
+                lightOn.SetActive(false);
+                lightDisable.SetActive(false);
+                lightOff.SetActive(true);
+            }
+        }
         UpdateDuration();
     }
 
@@ -72,7 +94,7 @@ public class FlashlightController : MonoBehaviour
         else
         {
             if(currentDuration<= maxDuration)
-                currentDuration += Time.deltaTime;
+                currentDuration += Time.deltaTime*2;
         }
     }
 
@@ -80,6 +102,9 @@ public class FlashlightController : MonoBehaviour
     {
         if (isOn)
         {
+            lightOn.SetActive(true);
+            lightDisable.SetActive(false);
+            lightOff.SetActive(false);
             currentIntensity = Mathf.Lerp(minIntensity, maxIntensity, maxDuration / minDuration);
             flashlight.intensity = currentIntensity;
             flashlight.spotAngle = maxSpotAngle;

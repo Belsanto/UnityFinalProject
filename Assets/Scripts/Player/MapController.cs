@@ -5,7 +5,6 @@ public class MapController : MonoBehaviour
 {
     [SerializeField] private Camera miniMapCamera;
     [SerializeField] private GameObject hud;
-    [SerializeField] private GameObject inv;
     
     private void Start()
     {
@@ -17,18 +16,10 @@ public class MapController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            miniMapCamera.enabled = !miniMapCamera.enabled;
+            var enabled1 = miniMapCamera.enabled;
+            enabled1 = !enabled1;
+            miniMapCamera.enabled = enabled1;
+            hud.SetActive(!enabled1);
         }
-    }
-
-    private void OnEnable()
-    {
-        hud.SetActive(false);
-        inv.SetActive(false);
-    }
-
-    private void OnDisable()
-    {
-        hud.SetActive(true);
     }
 }

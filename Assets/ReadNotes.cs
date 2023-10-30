@@ -12,8 +12,7 @@ public class ReadNotes : MonoBehaviour
 
     [SerializeField] private GameObject noteUI;
     [SerializeField] private GameObject hud;
-    [SerializeField] private GameObject pause;
-
+    [SerializeField] private GameObject hudCard;
     [SerializeField] private GameObject interact;
     [SerializeField] private bool isWin;
 
@@ -26,9 +25,11 @@ public class ReadNotes : MonoBehaviour
 
     void Start()
     {
-        noteUI.SetActive(false);
+        if (isWin == false)
+        {
+            noteUI.SetActive(false);
+        }
         hud.SetActive(true);
-        pause.SetActive(false);
         interact.SetActive(false);
         reading = false;
         inReach = false;
@@ -58,11 +59,19 @@ public class ReadNotes : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && inReach && reading == false)
         {
             interact.SetActive(false);
-            playerMovement.SetIsAbleToLook(false);
-            noteUI.SetActive(true);
+            if (isWin == false)
+            {
+                playerMovement.SetIsAbleToLook(false);
+                noteUI.SetActive(true);
+            }
+            else
+            {
+                noteUI.GetComponent<MenuController>().SetWinScreen();
+            }
             pickUpSound.Play();
             hud.SetActive(false);
-            pause.SetActive(false);
+            
+            
             StartCoroutine(CloseOpenNote(0.1f));
             if (!(selectedItem == ItemOptions.Note))
             {
@@ -78,6 +87,7 @@ public class ReadNotes : MonoBehaviour
             noteUI.SetActive(false);
             dropSound.Play();
             hud.SetActive(true);
+            hudCard.SetActive(true);
             Time.timeScale = 1f;
             Cursor.lockState = CursorLockMode.Locked; // Bloquear el cursor en el centro de la pantalla
             Cursor.visible = false; // Hacer el cursor pauseisible
