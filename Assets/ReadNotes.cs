@@ -44,16 +44,22 @@ public class ReadNotes : MonoBehaviour
         menuController = FindObjectOfType<MenuController>(); // referencia al script menuController
 
 
+
+    }
+
+    private void OnMouseEnter()
+    {
         if (transform.childCount > 0)
         {
-            Transform firstChildTransform = transform.GetChild(0);
-            render = firstChildTransform.GetComponent<Renderer>();
-        } else
-        {
-            render = GetComponent<Renderer>();
+            foreach (Transform child in transform)
+            {
+                if (child.gameObject.activeSelf)
+                {
+                    Transform activeInteractable = child;
+                    render = activeInteractable.GetComponent<Renderer>();
+                }
+            }
         }
-
-
     }
 
 
