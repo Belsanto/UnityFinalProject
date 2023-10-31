@@ -15,6 +15,7 @@ public class MenuController : MonoBehaviour
     [SerializeField] private GameObject endBG2;
     [SerializeField] private GameObject pauseBG;
     [SerializeField] private GameObject game;
+    [SerializeField] private AudioListener camUI;
     private GameManager gameManager;
     
     private bool isPaused = false;
@@ -43,6 +44,7 @@ public class MenuController : MonoBehaviour
         isPaused = true;
         pauseMenu.SetActive(true); // Show the pause menu (you need to set this in the Unity Inspector)
         game.SetActive(false);
+        camUI.enabled = true;
         // Make the cursor visible and unlock it
         UnlockCursor(true);
     }
@@ -52,6 +54,7 @@ public class MenuController : MonoBehaviour
         Time.timeScale = 1; // Resume the game time
         isPaused = false;
         pauseMenu.SetActive(false); // Hide the pause menu
+        camUI.enabled = false;
         game.SetActive(true);
         UnlockCursor(false); // hide cursor
     }
@@ -59,6 +62,7 @@ public class MenuController : MonoBehaviour
     {
         gameManager.ResetItems();
         Time.timeScale = 1; // Make sure the game is not paused
+        camUI.enabled = false;
         game.SetActive(true);
         ActiveEndBG(false, true);
         UnlockCursor(true);
@@ -69,6 +73,7 @@ public class MenuController : MonoBehaviour
         gameManager.ResetItems();
         Time.timeScale = 1; // Resume the game time
         int buildIndex = SceneManager.GetActiveScene().buildIndex;
+        camUI.enabled = false;
         game.SetActive(true);
         ActiveEndBG(false, true);
         UnlockCursor(false);
@@ -79,6 +84,7 @@ public class MenuController : MonoBehaviour
     {
         ActiveEndBG(true, true);
         game.SetActive(false);
+        camUI.enabled = true;
         gameOver.SetActive(true);
         pauseMenu.SetActive(false);
         win.SetActive(false);
@@ -90,6 +96,7 @@ public class MenuController : MonoBehaviour
     {
         ActiveEndBG(true, false);
         game.SetActive(false);
+        camUI.enabled = true;
         gameOver.SetActive(true);
         pauseMenu.SetActive(false);
         die.SetActive(false);
