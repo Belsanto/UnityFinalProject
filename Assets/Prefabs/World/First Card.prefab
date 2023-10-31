@@ -71,8 +71,9 @@ MonoBehaviour:
   selectedItem: 0
   noteUI: {fileID: 0}
   hud: {fileID: 0}
-  inv: {fileID: 0}
-  pickUpText: {fileID: 0}
+  hudCard: {fileID: 0}
+  interact: {fileID: 0}
+  isWin: 0
   pickUpSound: {fileID: 546852305224545667}
   dropSound: {fileID: 546852305224545667}
 --- !u!82 &546852305224545667
@@ -234,6 +235,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4c774eacc8336154eb814ed9086f3df7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4456775891383827377}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4c774eacc8336154eb814ed9086f3df7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 762389773845360118}
   m_SourcePrefab: {fileID: 100100000, guid: 4c774eacc8336154eb814ed9086f3df7, type: 3}
 --- !u!1 &7147452125667863859 stripped
 GameObject:
@@ -252,6 +256,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe3d659f7ea4cea49b202be5f8570d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!111 &762389773845360118
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7147452125667863859}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 5e2c8970c04e93e4291d191f1b4f32bd, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 5e2c8970c04e93e4291d191f1b4f32bd, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!4 &7528621623771625353 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4c774eacc8336154eb814ed9086f3df7, type: 3}
