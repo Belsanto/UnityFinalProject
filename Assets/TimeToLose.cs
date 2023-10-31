@@ -45,7 +45,7 @@ public class TimeToLose : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(currentTime / 60);
         int seconds = Mathf.FloorToInt(currentTime % 60);
-        string timeText = string.Format("SCAPE! : {0:00}:{1:00}", minutes, seconds);
+        string timeText = string.Format("ESCAPE! : {0:00}:{1:00}", minutes, seconds);
         textMeshPro.text = timeText;
     }
 }

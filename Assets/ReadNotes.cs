@@ -14,14 +14,19 @@ public class ReadNotes : MonoBehaviour
     [SerializeField] private GameObject hud;
     [SerializeField] private GameObject hudCard;
     [SerializeField] private GameObject interact;
+    [SerializeField] private MenuController menuController;
     [SerializeField] private bool isWin;
     [SerializeField] private bool isNote;
 
     [SerializeField] private GameObject pickUpSound;
     [SerializeField] private GameObject dropSound;
 
+    private Renderer render;
+
+    private float maxRange = 1f;
     private bool inReach;
     private bool reading;
+    private bool isInteracting;
     private PlayerMovement playerMovement;
 
     void Start()
@@ -34,15 +39,44 @@ public class ReadNotes : MonoBehaviour
         interact.SetActive(false);
         reading = false;
         inReach = false;
+        isInteracting = false;
         playerMovement = FindObjectOfType<PlayerMovement>(); // referencia al script ImprovedPlayerMovement
+        menuController = FindObjectOfType<MenuController>(); // referencia al script menuController
+
+
+        if (transform.childCount > 0)
+        {
+            Transform firstChildTransform = transform.GetChild(0);
+            render = firstChildTransform.GetComponent<Renderer>();
+        } else
+        {
+            render = GetComponent<Renderer>();
+        }
+
+
     }
 
-    void OnMouseEnter()
+
+    private void OnMouseOver()
     {
-        if (reading == false)
+
+        if (!menuController.isPaused)
         {
-            inReach = true;
-            interact.SetActive(true);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, maxRange) && !isInteracting && !reading)
+            {
+                inReach = true;
+                interact.SetActive(true);
+                if (gameObject.CompareTag("Cards") || gameObject.CompareTag("Book"))
+                {
+                    //render.materials[1].SetFloat("_Show_Outline", 1.0f);
+                    render.materials[1].SetInt("_Show_Outline", 1);
+                }
+            }
+
+
         }
     }
 
@@ -53,12 +87,24 @@ public class ReadNotes : MonoBehaviour
             inReach = false;
             interact.SetActive(false);
         }
+        if (gameObject.CompareTag("Cards") || gameObject.CompareTag("Book"))
+        {
+            //render.materials[1].SetFloat("_Show_Outline", 0.0f);
+            render.materials[1].SetInt("_Show_Outline", 0);
+
+        }
+
+
     }
 
     void Update()
     {
+
+
         if (Input.GetKeyDown(KeyCode.E) && inReach && reading == false)
         {
+            isInteracting = true;
+
             interact.SetActive(false);
             if (isWin == false)
             {
@@ -87,6 +133,9 @@ public class ReadNotes : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) && Time.timeScale == 0 && reading && isWin == false)
         {
+            isInteracting = false;
+
+
             reading = false;
             playerMovement.SetIsAbleToLook(true);
             noteUI.SetActive(false);

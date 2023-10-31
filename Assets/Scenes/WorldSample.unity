@@ -21269,6 +21269,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3233562633196963792, guid: 3fdaf6e842da8b6488b15201c4f21a92, type: 3}
+      propertyPath: m_text
+      value: 'ESCAPE! : 00:00 '
+      objectReference: {fileID: 0}
     - target: {fileID: 4162337765713759010, guid: 3fdaf6e842da8b6488b15201c4f21a92, type: 3}
       propertyPath: m_Name
       value: Game

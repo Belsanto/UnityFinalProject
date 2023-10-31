@@ -8,6 +8,8 @@ TagManager:
   - Fire
   - Door
   - Card 1
+  - Cards
+  - Book
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - UI
   - Position
   - Post Processing
-  - 
+  - HornTest
   - 
   - 
   - 
