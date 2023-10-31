@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -14,10 +15,16 @@ public class MenuController : MonoBehaviour
     [SerializeField] private GameObject endBG2;
     [SerializeField] private GameObject pauseBG;
     [SerializeField] private GameObject game;
+    [SerializeField] private AudioListener camUI;
+    private GameManager gameManager;
     
     public bool isPaused = false;
     public bool isEnd { set; get; }
 
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+    }
 
     void Update()
     {
@@ -40,6 +47,7 @@ public class MenuController : MonoBehaviour
         isPaused = true;
         pauseMenu.SetActive(true); // Show the pause menu (you need to set this in the Unity Inspector)
         game.SetActive(false);
+        camUI.enabled = true;
         // Make the cursor visible and unlock it
         UnlockCursor(true);
     }
@@ -49,31 +57,37 @@ public class MenuController : MonoBehaviour
         Time.timeScale = 1; // Resume the game time
         isPaused = false;
         pauseMenu.SetActive(false); // Hide the pause menu
+        camUI.enabled = false;
         game.SetActive(true);
         UnlockCursor(false); // hide cursor
     }
     public void ReturnToMainMenu()
     {
+        gameManager.ResetItems();
         Time.timeScale = 1; // Make sure the game is not paused
+        camUI.enabled = false;
         game.SetActive(true);
-        ActiveEndBG(false);
+        ActiveEndBG(false, true);
         UnlockCursor(true);
         SceneManager.LoadScene(0); // Replace '0' with the build index of your main menu scene
     }
     public void TryAgain()
     {
+        gameManager.ResetItems();
         Time.timeScale = 1; // Resume the game time
         int buildIndex = SceneManager.GetActiveScene().buildIndex;
+        camUI.enabled = false;
         game.SetActive(true);
-        ActiveEndBG(false);
+        ActiveEndBG(false, true);
         UnlockCursor(false);
         SceneManager.LoadScene(buildIndex);
     }
 
     public void SetLoseScreen()
     {
-        ActiveEndBG(true);
+        ActiveEndBG(true, true);
         game.SetActive(false);
+        camUI.enabled = true;
         gameOver.SetActive(true);
         pauseMenu.SetActive(false);
         win.SetActive(false);
@@ -83,8 +97,9 @@ public class MenuController : MonoBehaviour
 
     public void SetWinScreen()
     {
-        ActiveEndBG(true);
+        ActiveEndBG(true, false);
         game.SetActive(false);
+        camUI.enabled = true;
         gameOver.SetActive(true);
         pauseMenu.SetActive(false);
         die.SetActive(false);
@@ -92,9 +107,12 @@ public class MenuController : MonoBehaviour
         UnlockCursor(true);
     }
 
-    private void ActiveEndBG(bool active)
+    private void ActiveEndBG(bool active, bool lose)
     {
-        endBG.SetActive(active);
+        if (lose)
+        {
+            endBG.SetActive(active);
+        }
         endBG2.SetActive(active);
         pauseBG.SetActive(!active);
     }

@@ -35,6 +35,7 @@ public class FlashlightController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
+            activeSound.Play();
             ToggleFlashlight();
         }
 

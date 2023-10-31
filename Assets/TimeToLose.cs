@@ -5,7 +5,7 @@ using TMPro;
 
 public class TimeToLose : MonoBehaviour
 {
-    [SerializeField] [Range(2, 8)] 
+    [SerializeField] [Range(1, 8)] 
     private float initialTime = 8.0f; // Tiempo inicial en minutos (ajusta el valor en el Inspector)
     private TextMeshProUGUI textMeshPro;
     
@@ -33,7 +33,6 @@ public class TimeToLose : MonoBehaviour
         {
             // El tiempo ha terminado, imprime un mensaje
             Debug.Log("¡Perdiste!");
-            endGameMenu.SetActive(true);
             endGameMenu.GetComponent<MenuController>().SetLoseScreen();
             playerMovement.SetIsAbleToLook(false);
             Cursor.visible = true;
@@ -46,7 +45,7 @@ public class TimeToLose : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(currentTime / 60);
         int seconds = Mathf.FloorToInt(currentTime % 60);
-        string timeText = string.Format("SCAPE! : {0:00}:{1:00}", minutes, seconds);
+        string timeText = string.Format("ESCAPE! : {0:00}:{1:00}", minutes, seconds);
         textMeshPro.text = timeText;
     }
 }
