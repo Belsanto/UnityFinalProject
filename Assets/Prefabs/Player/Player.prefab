@@ -1662,6 +1662,10 @@ MonoBehaviour:
   maxIntensity: 3
   minSpotAngle: 50
   maxSpotAngle: 80
+  activeSound: {fileID: 0}
+  lightOn: {fileID: 0}
+  lightOff: {fileID: 0}
+  lightDisable: {fileID: 0}
 --- !u!1 &5750692322409572699
 GameObject:
   m_ObjectHideFlags: 0
@@ -1924,7 +1928,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   miniMapCamera: {fileID: 0}
   hud: {fileID: 4183125766958011341}
-  inv: {fileID: 8858500667711338746}
 --- !u!1 &6161939949274823152
 GameObject:
   m_ObjectHideFlags: 0
@@ -2163,7 +2166,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 6.852707, y: -0.45331955}
+  m_AnchoredPosition: {x: 6.852722, y: -0.45331955}
   m_SizeDelta: {x: 302.88196, y: 189.23228}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7990250429895602861

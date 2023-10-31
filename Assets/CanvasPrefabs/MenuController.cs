@@ -18,7 +18,7 @@ public class MenuController : MonoBehaviour
     [SerializeField] private AudioListener camUI;
     private GameManager gameManager;
     
-    private bool isPaused = false;
+    public bool isPaused = false;
     public bool isEnd { set; get; }
 
     private void Start()
@@ -34,6 +34,9 @@ public class MenuController : MonoBehaviour
             if (isPaused == false)
             {
                 PauseGame();
+            } else
+            {
+                ResumeGame();
             }
         }
     }
