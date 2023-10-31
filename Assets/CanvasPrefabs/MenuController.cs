@@ -15,7 +15,7 @@ public class MenuController : MonoBehaviour
     [SerializeField] private GameObject pauseBG;
     [SerializeField] private GameObject game;
     
-    private bool isPaused = false;
+    public bool isPaused = false;
     public bool isEnd { set; get; }
 
 
@@ -27,6 +27,9 @@ public class MenuController : MonoBehaviour
             if (isPaused == false)
             {
                 PauseGame();
+            } else
+            {
+                ResumeGame();
             }
         }
     }
