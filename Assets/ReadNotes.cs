@@ -77,7 +77,6 @@ public class ReadNotes : MonoBehaviour
                 interact.SetActive(true);
                 if (gameObject.CompareTag("Cards") || gameObject.CompareTag("Book"))
                 {
-                    //render.materials[1].SetFloat("_Show_Outline", 1.0f);
                     render.materials[1].SetInt("_Show_Outline", 1);
                 }
             }
@@ -95,7 +94,6 @@ public class ReadNotes : MonoBehaviour
         }
         if (gameObject.CompareTag("Cards") || gameObject.CompareTag("Book"))
         {
-            //render.materials[1].SetFloat("_Show_Outline", 0.0f);
             render.materials[1].SetInt("_Show_Outline", 0);
 
         }
