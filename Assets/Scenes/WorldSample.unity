@@ -4800,6 +4800,10 @@ PrefabInstance:
       propertyPath: CreateChance
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 1737171623364297543, guid: 2682c238b82d6b5408725d76f28114f7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1780044176798403309, guid: 2682c238b82d6b5408725d76f28114f7, type: 3}
       propertyPath: m_Shadows.m_Strength
       value: 1
