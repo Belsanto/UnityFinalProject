@@ -52,4 +52,9 @@ public class GameManager : MonoBehaviour
     {
         return itemsDictionary.TryGetValue(itemType, out bool value) && value;
     }
+
+    public void ResetItems()
+    {
+        itemsDictionary = new Dictionary<string, bool>();
+    }
 }
