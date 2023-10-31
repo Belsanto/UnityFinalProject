@@ -17,8 +17,8 @@ public class ReadNotes : MonoBehaviour
     [SerializeField] private bool isWin;
     [SerializeField] private bool isNote;
 
-    [SerializeField] private AudioSource pickUpSound;
-    [SerializeField] private AudioSource dropSound;
+    [SerializeField] private GameObject pickUpSound;
+    [SerializeField] private GameObject dropSound;
 
     private bool inReach;
     private bool reading;
@@ -69,7 +69,11 @@ public class ReadNotes : MonoBehaviour
             {
                 noteUI.GetComponent<MenuController>().SetWinScreen();
             }
-            pickUpSound.Play();
+            if (isNote)
+            {
+                dropSound.SetActive(false);
+                pickUpSound.SetActive(true);
+            }
             hud.SetActive(false);
             
             
@@ -86,7 +90,12 @@ public class ReadNotes : MonoBehaviour
             reading = false;
             playerMovement.SetIsAbleToLook(true);
             noteUI.SetActive(false);
-            dropSound.Play();
+            
+            if (isNote)
+            {
+                pickUpSound.SetActive(false);
+                dropSound.SetActive(true);
+            }
             hud.SetActive(true);
             if (isNote == false)
             {
