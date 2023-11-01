@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,12 @@ using TMPro;
 
 public class TimeToLose : MonoBehaviour
 {
-    [SerializeField] [Range(1, 8)] private float initialTime = 8.0f; // Tiempo inicial en minutos (ajusta el valor en el Inspector)
+    [SerializeField] [Range(.5f, 8)] private float initialTime = 8.0f; // Tiempo inicial en minutos (ajusta el valor en el Inspector)
     private TextMeshProUGUI textMeshPro;
     [SerializeField] private AudioSource normalBreathing;
     [SerializeField] private AudioSource mediumBreathing;
     [SerializeField] private AudioSource fastBreathing;
+    [SerializeField] private AudioSource demondSound;
     [SerializeField] private GameObject endGameMenu; 
     public float currentTime { get; private set; }
     private float breathTime;
@@ -24,7 +26,12 @@ public class TimeToLose : MonoBehaviour
     {
         PlayAppropriateBreathingSound();
         breathTime -= Time.deltaTime;
-        Debug.Log("Time: "+breathTime);
+
+        if (Math.Abs(breathTime - 8) < 1)
+        {
+           //Debug.Log("Time: "+breathTime);
+            demondSound.Play();
+        }
         UpdateTime();
     }
 
