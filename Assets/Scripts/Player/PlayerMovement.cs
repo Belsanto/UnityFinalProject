@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Variables relacionadas con el salto del jugador
     [Header("Jump")]
+    [SerializeField] private float coyoteTime = 0.1f; // Define el tiempo coyote en segundos
     [SerializeField] [Range(0f, 15f)] private float jumpForce = 6f;
     [SerializeField] private float gravityMultiplier = 1f;
     [SerializeField] private Transform groundCheck; // Punto de verificación para determinar si el jugador está en el suelo
@@ -35,12 +36,19 @@ public class PlayerMovement : MonoBehaviour
     private bool ableToRun;
     private float currentRunDuration;
     private bool isGrounded;
+    
+    [Header("Audio")]
+    [SerializeField] private AudioSource walkSound;
+    [SerializeField] private AudioSource runSound;
+    [SerializeField] private AudioSource jumpSound;
+    [SerializeField] private AudioSource landSound;
 
-    // Variables para el tiempo coyote que permite un breve periodo para saltar después de dejar el suelo
-    [SerializeField] private float coyoteTime = 0.1f; // Define el tiempo coyote en segundos
+
+    // Variable para el tiempo coyote que permite un breve periodo para saltar después de dejar el suelo
     private float coyoteTimeCounter;
 
-    private float timeBetweenJumps = 0.5f; // Nuevo parámetro de tiempo entre saltos
+    // Parámetro de tiempo entre saltos
+    private float timeBetweenJumps = 0.5f; 
 
     // Variables para el contenedor de la cámara y el controlador de personajes
     private Transform cameraContainer;
@@ -58,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isAbleToLook = active;
     }
+    
     // Método que se ejecuta al iniciar
     private void Start()
     {
@@ -155,7 +164,31 @@ public class PlayerMovement : MonoBehaviour
         }
         
         // Verificar si el jugador está en el suelo usando un objeto de esfera para la detección de colisiones
-        isGrounded = Physics.CheckSphere(groundCheck.position, 0.4f, groundMask);
+        isGrounded = Physics.CheckSphere(groundCheck.position, 0.3f, groundMask);
+
+        // Reproducir sonido de caminar y correr
+        if (isGrounded && inputVectorMovement.magnitude > 0.01f)
+        {
+            if (isRunning)
+            {
+                if (!runSound.isPlaying)
+                {
+                    runSound.Play();
+                }
+            }
+            else
+            {
+                if (!walkSound.isPlaying)
+                {
+                    walkSound.Play();
+                }
+            }
+        }
+        else
+        {
+            walkSound.Stop();
+            runSound.Stop();
+        }
     }
 
     // Método para controlar el movimiento del personaje
@@ -182,6 +215,12 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetButton("Jump") && isGrounded)
             {
+                // Reproducir sonido de salto
+                if (!jumpSound.isPlaying)
+                {
+                    jumpSound.Play();
+                    Debug.Log("jump");
+                }
                 moveDirection.y = jumpForce;
                 coyoteTimeCounter = 0;
                 timeBetweenJumps = 1f; // Reiniciar el tiempo entre saltos
@@ -189,6 +228,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            // Reproducir sonido de aterrizaje
+            if (!landSound.isPlaying && moveDirection.y <= 0.1f && isGrounded)
+            {
+                landSound.Play();
+            }
             moveDirection.y += gravityMultiplier * Physics.gravity.y * Time.deltaTime;
         }
 
