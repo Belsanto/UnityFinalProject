@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   muzzlePoint: {fileID: 1117727157653431354}
-  muzzleFireEffect: {fileID: 6075294936380322081, guid: 27daa4c930860b243b1a7e32a667ac0f, type: 3}
+  muzzleFireEffect: {fileID: 3037809755453148184, guid: 7a36b6d8c42cd5e44b2f136486ff96c0, type: 3}
   bloodParticles: {fileID: 1561956976648597785, guid: 6740cc81000dcbb418563d736b07f68d, type: 3}
   lightParticles: {fileID: 2516179862320649513, guid: c992189554e1fa345a5b2bc906a8adf0, type: 3}
   damage: 10

@@ -9,6 +9,8 @@ public class Gun : MonoBehaviour
     [SerializeField] private GameObject muzzleFireEffect;
     [SerializeField] private GameObject bloodParticles;
     [SerializeField] private GameObject lightParticles;
+    [SerializeField] private AudioClip shootS;
+    [SerializeField] private AudioClip reloadS;
     [SerializeField] private float damage = 10f;
     [SerializeField] private float range = 100f;
 
@@ -24,12 +26,15 @@ public class Gun : MonoBehaviour
     [SerializeField] private float nextFireTime = 0f;
     [SerializeField] public float reloadTime = 2f; // Time it takes to reload
     [SerializeField] private bool isReloading = false;
+    private AudioSource audioComponent;
+
 
 
     private void Start()
     {
         fpsCam = Camera.main;
         currentAmmo = maxAmmo;
+        audioComponent = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -61,10 +66,14 @@ public class Gun : MonoBehaviour
         RaycastHit hit;
 
         gameObject.GetComponent<Animation>().Play("PistolGun");
+        //Quaternion.Euler(180f, 0f, 0f)
+        Quaternion newRot = muzzlePoint.transform.rotation * Quaternion.Euler(0f, -90f, 0f);
 
-        GameObject fireEffect = Instantiate(muzzleFireEffect, muzzlePoint.transform.position, Quaternion.Euler(180f, 0f, 0f)) as GameObject;
+        GameObject fireEffect = Instantiate(muzzleFireEffect, muzzlePoint.transform.position, newRot) as GameObject;
         fireEffect.GetComponent<ParticleSystem>().Play();
         Destroy(fireEffect, 1f);
+
+        audioComponent.PlayOneShot(shootS);
 
 
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
@@ -97,6 +106,7 @@ public class Gun : MonoBehaviour
             isReloading = true;
             gameObject.GetComponent<Animation>().Play("ReloadPistol");
 
+            audioComponent.PlayOneShot(reloadS);
             // You can add reload animations or effects here
             // Reset the current ammo after the specified reload time
             Invoke("FinishReload", reloadTime);
