@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,9 @@ public class GameManager : MonoBehaviour
 {
     private Dictionary<string, bool> itemsDictionary = new Dictionary<string, bool>();
     private static GameManager instance;
+
+    // Arreglo de notes
+    public bool[] Notes { get; set; }
 
     public static GameManager Instance
     {
@@ -35,6 +39,11 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void Start()
+    {
+        Notes = new bool[6] { false, false, false, false, false, false };
+    }
+
     public void AcquireItem(string itemType)
     {
         if (!itemsDictionary.ContainsKey(itemType))
@@ -55,6 +64,53 @@ public class GameManager : MonoBehaviour
 
     public void ResetItems()
     {
+        Notes = new bool[6] { false, false, false, false, false, false };
         itemsDictionary = new Dictionary<string, bool>();
+    }
+
+    // Función para establecer en true la posición indicada en el arreglo de notes
+    public void FindNote(int position)
+    {
+        if (position >= 0 && position < Notes.Length)
+        {
+            Notes[position] = true;
+        }
+        else
+        {
+            Debug.Log("La posición especificada está fuera del rango del arreglo de notes.");
+        }
+    }
+    
+    public void ActivateNote(int posicion)
+    {
+        if (!GetNoteState(posicion))
+        {
+            FindNote(posicion);
+        }
+    }
+
+    public bool GetNoteState(int posicion)
+    {
+        if (posicion >= 0 && posicion < Notes.Length)
+        {
+            return Notes[posicion];
+        }
+        else
+        {
+            Debug.Log("La posición especificada está fuera del rango del arreglo de notas.");
+            return false;
+        }
+    }
+    public int TotalNotes()
+    {
+        int count = 0;
+        foreach (bool note in Notes)
+        {
+            if (note)
+            {
+                count++;
+            }
+        }
+        return count;
     }
 }
