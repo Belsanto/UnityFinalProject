@@ -24797,7 +24797,7 @@ PrefabInstance:
       objectReference: {fileID: 393787814}
     - target: {fileID: 6014466241130054910, guid: 3fdaf6e842da8b6488b15201c4f21a92, type: 3}
       propertyPath: initialTime
-      value: 1
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6014466241130054910, guid: 3fdaf6e842da8b6488b15201c4f21a92, type: 3}
       propertyPath: fastBreathing
