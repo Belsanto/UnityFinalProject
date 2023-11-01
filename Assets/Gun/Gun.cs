@@ -26,7 +26,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private float nextFireTime = 0f;
     [SerializeField] public float reloadTime = 2f; // Time it takes to reload
     [SerializeField] private bool isReloading = false;
-    private AudioSource audio;
+    private AudioSource audioComponent;
 
 
 
@@ -34,7 +34,7 @@ public class Gun : MonoBehaviour
     {
         fpsCam = Camera.main;
         currentAmmo = maxAmmo;
-        audio = GetComponent<AudioSource>();
+        audioComponent = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -73,7 +73,7 @@ public class Gun : MonoBehaviour
         fireEffect.GetComponent<ParticleSystem>().Play();
         Destroy(fireEffect, 1f);
 
-        audio.PlayOneShot(shootS);
+        audioComponent.PlayOneShot(shootS);
 
 
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
@@ -106,7 +106,7 @@ public class Gun : MonoBehaviour
             isReloading = true;
             gameObject.GetComponent<Animation>().Play("ReloadPistol");
 
-            audio.PlayOneShot(reloadS);
+            audioComponent.PlayOneShot(reloadS);
             // You can add reload animations or effects here
             // Reset the current ammo after the specified reload time
             Invoke("FinishReload", reloadTime);
