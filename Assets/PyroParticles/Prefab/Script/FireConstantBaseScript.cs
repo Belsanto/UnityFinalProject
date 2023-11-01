@@ -4,7 +4,7 @@ using System.Collections;
 namespace DigitalRuby.PyroParticles
 {
     /// <summary>
-    /// Provides an easy wrapper to looping audio sources with nice transitions for volume when starting and stopping
+    /// Provides an easy wrapper to looping audioComponent sources with nice transitions for volume when starting and stopping
     /// </summary>
     public class LoopingAudioSource
     {
