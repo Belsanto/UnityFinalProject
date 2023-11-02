@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour
 
     // Arreglo de notes
     public bool[] Notes { get; set; }
+    private int hitCount = 0;
+    private bool isImmune = false;
+    private float immunityTime = 4f;
+    private float lastHitTime = 0f;
 
     public static GameManager Instance
     {
@@ -66,6 +70,7 @@ public class GameManager : MonoBehaviour
     {
         Notes = new bool[6] { false, false, false, false, false, false };
         itemsDictionary = new Dictionary<string, bool>();
+        hitCount = 0;
     }
 
     // Función para establecer en true la posición indicada en el arreglo de notes
@@ -113,4 +118,21 @@ public class GameManager : MonoBehaviour
         }
         return count;
     }
+
+    public bool IsDeath()
+    {
+        return (hitCount >= 5);
+    }
+    public bool IncreaseHit()
+    {
+        if (Time.time - lastHitTime > immunityTime)
+        {
+            hitCount++;
+            lastHitTime = Time.time;
+            return true;
+        }
+
+        return false;
+    }
+
 }
