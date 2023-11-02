@@ -7,6 +7,7 @@ public class CameraBobbing : MonoBehaviour
     [SerializeField] private float walkingBobbingSpeed = 0.18f; // Velocidad de oscilación de la cámara al caminar
     [SerializeField] private float runningBobbingSpeed = 0.24f; // Velocidad de oscilación de la cámara al correr
     [SerializeField] private float bobbingAmount = 0.2f; // Magnitud de oscilación de la cámara
+    [SerializeField] private PlayerMovement playerMovementScript;
 
     private float midpoint = 0.1f; // Punto medio del movimiento de la cámara
     private float timer = 0.0f;
@@ -16,7 +17,7 @@ public class CameraBobbing : MonoBehaviour
         float waveslice = 0.0f;
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        float bobbingSpeed = Input.GetKey(KeyCode.LeftShift) ? runningBobbingSpeed : walkingBobbingSpeed;
+        float bobbingSpeed = (playerMovementScript.IsRunning()) ? runningBobbingSpeed : walkingBobbingSpeed;
 
         Vector3 cSharpConversion = transform.localPosition;
 

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Asegurarse de que el GameObject tenga un CharacterController adjunto
 [RequireComponent(typeof(CharacterController))]
@@ -17,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] [Range(0f, 12f)] private float runningSpeed = 11.5f;
     [SerializeField] private float maxRunDuration = 50f; // Duración máxima de la carrera
     [SerializeField] private float minRunDuration = 10f; // Duración mínima de la carrera
+    // Agregar referencia al slider de stamina en Unity
+    [SerializeField] private Slider staminaSlider;
     private float playerCurrentSpeed;
 
     // Variables relacionadas con la vista y sensibilidad de la cámara
@@ -84,6 +87,9 @@ public class PlayerMovement : MonoBehaviour
     {
         // Leer la entrada del jugador
         ReadInput();
+        
+        // Actualizar el slider de stamina
+        UpdateStaminaSlider();
 
         if (isAbleToMove)
         {
@@ -261,4 +267,22 @@ public class PlayerMovement : MonoBehaviour
         // Aplicar la rotación horizontal al GameObject
         transform.rotation *= Quaternion.Euler(0, inputVectorLook.x * lookSensitivity, 0);
     }
+
+    public void SetLookSensitivity(float sensitivityValue)
+    {
+        lookSensitivity = sensitivityValue;
+    }
+
+    // Método para actualizar el valor del slider de stamina
+    private void UpdateStaminaSlider()
+    {
+        // Asigna el valor de stamina al slider
+        staminaSlider.value = currentRunDuration;
+    }
+
+    public bool IsRunning()
+    {
+        return isRunning;
+    }
+
 }
