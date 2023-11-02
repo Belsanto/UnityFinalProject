@@ -16,10 +16,11 @@ public class TimeToLose : MonoBehaviour
     public float currentTime { get; private set; }
     private float breathTime;
     private PlayerMovement playerMovement;
-
+    private GameManager gameManager;
     private void Start()
     {
         InitializeComponents();
+        gameManager = GameManager.Instance;
     }
 
     private void Update()
@@ -33,6 +34,10 @@ public class TimeToLose : MonoBehaviour
             demondSound.Play();
         }
         UpdateTime();
+        if (gameManager.IsDeath())
+        {
+            HandleGameEnd();
+        }
     }
 
     private void InitializeComponents()
