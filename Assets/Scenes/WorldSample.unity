@@ -3988,7 +3988,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: da8d3543641123841ad91c013e4ea706, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 931523c039e8648f2ae2785389e68571, type: 3}
+  m_audioClip: {fileID: 8300000, guid: aa2fb21a989be4e0dbdcca4f63ca8806, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -4034,7 +4034,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.191
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -31492,6 +31492,10 @@ PrefabInstance:
       propertyPath: m_text
       value: 'ESCAPE! : 00:00 '
       objectReference: {fileID: 0}
+    - target: {fileID: 3233562633196963792, guid: 3fdaf6e842da8b6488b15201c4f21a92, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3509307942746489110, guid: 3fdaf6e842da8b6488b15201c4f21a92, type: 3}
       propertyPath: runSound
       value: 
@@ -31618,11 +31622,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6892688973315220443, guid: 3fdaf6e842da8b6488b15201c4f21a92, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.07811737
+      value: -0.078125
       objectReference: {fileID: 0}
     - target: {fileID: 6892688973315220443, guid: 3fdaf6e842da8b6488b15201c4f21a92, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -10.824002
+      value: -10.824005
       objectReference: {fileID: 0}
     - target: {fileID: 7116369448244274811, guid: 3fdaf6e842da8b6488b15201c4f21a92, type: 3}
       propertyPath: m_text
