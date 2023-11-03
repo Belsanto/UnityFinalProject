@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float retreatSpeed = 2.0f;
     [SerializeField] private float attackRange = 1.5f;
     [SerializeField] private float health = 50f;
-    [SerializeField] private float timeToReactivate = 5f;
+    [SerializeField] private float timeToReactivate = 20f;
     [SerializeField] private Image canvasImage; // Asegúrate de asignar esta variable desde el editor Unity
 
     private float Originalspeed;
@@ -38,6 +38,7 @@ public class Enemy : MonoBehaviour
         ownAnimator = GetComponent<Animator>();
         Originalspeed = speed;
         gameManager = GameManager.Instance;
+        walkSound.Play();
     }
 
     void Update()
@@ -53,10 +54,6 @@ public class Enemy : MonoBehaviour
                 ownAnimator.SetFloat("speed", 1);
                 stunTimer = 0f;
             }
-        }
-        else
-        {
-            walkSound.Play();
         }
 
         if (!isDead)
@@ -111,13 +108,15 @@ public class Enemy : MonoBehaviour
             Debug.Log("Golpe");
             if (gameManager.IncreaseHit())
             {
+                // Reproducir sonido de disparo
+                attackSound.Play();
+                Debug.Log("Attack Sound");
                 // Reproducir sonido de quejido del personaje
                 playerSound.Play();
+                Debug.Log("Player Sound");
             }
             // Realiza el fade out y el fade in de la imagen del canvas
 
-            // Reproducir sonido de disparo
-            attackSound.Play();
 
             canvasImage.DOFade(1, 1f).OnComplete(() =>
             {
@@ -149,6 +148,7 @@ public class Enemy : MonoBehaviour
                 ownAnimator.SetTrigger("damage");
                 // Reproducir sonido de herida
                 hurtSound.Play();
+                Debug.Log("Hurt Sound");
             }
         }
     }
@@ -162,6 +162,8 @@ public class Enemy : MonoBehaviour
         StartCoroutine(ReactivateAfterTime(timeToReactivate));
         // Reproducir sonido de muerte
         deathSound.Play();
+        walkSound.Stop();
+        Debug.Log("Death Sound");
     }
 
     void ReturnToInitialPosition()
@@ -178,7 +180,9 @@ public class Enemy : MonoBehaviour
         isDead = false;
         health = 50f; // Reinicia la salud
         ownAnimator.SetTrigger("wake");
+        walkSound.Play();
         // Reproducir sonido de despertar
+        Debug.Log("Wake Sound");
         wakeUpSound.Play();
     }
 }
