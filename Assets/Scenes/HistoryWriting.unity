@@ -523,6 +523,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 291811273}
     - target: {fileID: 8342980796156344339, guid: 55cce4dce7f3bfd40a9664068e5bc940, type: 3}
+      propertyPath: buildIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342980796156344339, guid: 55cce4dce7f3bfd40a9664068e5bc940, type: 3}
       propertyPath: typingAudio
       value: 
       objectReference: {fileID: 1869285911}

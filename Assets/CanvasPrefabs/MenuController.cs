@@ -69,7 +69,7 @@ public class MenuController : MonoBehaviour
         game.SetActive(true);
         ActiveEndBG(false, true);
         UnlockCursor(true);
-        SceneManager.LoadScene(0); // Replace '0' with the build index of your main menu scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1); // Replace '0' with the build index of your main menu scene
     }
     public void TryAgain()
     {
