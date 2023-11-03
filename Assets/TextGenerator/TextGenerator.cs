@@ -9,10 +9,13 @@ using UnityEngine.UI;
 public class TextGenerator : MonoBehaviour
 {
     [SerializeField] private GameObject fadePanel;
+    [SerializeField] private GameObject typingAudio;
     [SerializeField] private TextMeshProUGUI textComponent;
     [SerializeField] private List<string> displayTextList = new List<string>();
     [SerializeField] private float characterDelay = 0.1f;
     [SerializeField] private int buildIndex;
+
+    private AudioSource audioS;
 
     private bool showAllText = false;
     private int currentIndex = 0;
@@ -22,6 +25,7 @@ public class TextGenerator : MonoBehaviour
 
     void Start()
     {
+        audioS = typingAudio.GetComponent<AudioSource>();
         StartCoroutine(AnimateTextList());
     }
 
@@ -36,6 +40,8 @@ public class TextGenerator : MonoBehaviour
                 //mientras el index este dentro de el largo de la lista
                 if (currentIndex < displayTextList.Count - 1)
                 {
+                    audioS.Stop();
+
                     currentIndex++;
                     StopAllCoroutines();
                     showAllText = false; 
@@ -43,6 +49,7 @@ public class TextGenerator : MonoBehaviour
                     StartCoroutine(AnimateTextList());
                 } else
                 {
+                    audioS.Stop();
                     fadePanel.GetComponent<Image>().DOFade(1, 1f).OnComplete(() =>
                     {
                         SceneManager.LoadScene(buildIndex);
@@ -53,6 +60,7 @@ public class TextGenerator : MonoBehaviour
             }
             else
             {
+                audioS.Stop();
                 // Mostrar todo el string
                 showAllText = true;
                 // Detener la corutina de mostrar el texto
@@ -69,6 +77,8 @@ public class TextGenerator : MonoBehaviour
         textComponent.text = "";
         currentString = displayTextList[currentIndex];
 
+        audioS.Play();
+
         foreach (char c in currentString)
         {
             // si no se ha dado clic, se muestra progresivamente el texto añadiendo uno por uno y eliminando el cursor cada vez
@@ -83,5 +93,7 @@ public class TextGenerator : MonoBehaviour
         }
         // Cuando termine o se de clic se muestra todo el string
         showAllText = true;
+        audioS.Stop();
+
     }
 }
