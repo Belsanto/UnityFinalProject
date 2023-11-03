@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WorldSample.unity
     guid: 273bd63ece1a72d4a908b14a5620f52f
+  - enabled: 1
+    path: Assets/Scenes/HistoryWriting.unity
+    guid: 47e9708bbc600c84cab02f4dfd66ff4c
   m_configObjects: {}
