@@ -81,7 +81,7 @@ public class TextGenerator : MonoBehaviour
 
         foreach (char c in currentString)
         {
-            // si no se ha dado clic, se muestra progresivamente el texto añadiendo uno por uno y eliminando el cursor cada vez
+            // si no se ha dado clic, se muestra progresivamente el texto aÃ±adiendo uno por uno y eliminando el cursor cada vez
             if (!showAllText)
             {
                 textComponent.text = currentString.Substring(0, textComponent.text.Length) + cursor;
