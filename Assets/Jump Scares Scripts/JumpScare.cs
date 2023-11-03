@@ -17,12 +17,15 @@ public class JumpScare : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        jumpScareObject.SetActive(true);
-        jumpScareObject.GetComponent<Animation>().Play();
-        scareSound.Play();
+        if (other.gameObject.CompareTag("Player"))
+        {
+            jumpScareObject.SetActive(true);
+            jumpScareObject.GetComponent<Animation>().Play();
+            scareSound.Play();
 
-        StartFadeOut();
-        Invoke("SetInactive", inactiveDurantion);
+            StartFadeOut();
+            Invoke("SetInactive", inactiveDurantion);
+        }
     }
 
 
