@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public bool[] Notes { get; set; }
     private int hitCount = 0;
     private bool isImmune = false;
-    private float immunityTime = 4f;
+    private float immunityTime = 2f;
     private float lastHitTime = 0f;
 
     public static GameManager Instance

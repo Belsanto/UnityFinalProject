@@ -14,6 +14,7 @@ public class FlashlightController : MonoBehaviour
     [SerializeField] private GameObject lightOn;
     [SerializeField] private GameObject lightOff;
     [SerializeField] private GameObject lightDisable;
+    [SerializeField] private bool canControl;
     
     private Light flashlight;
     private float currentDuration;
@@ -29,14 +30,21 @@ public class FlashlightController : MonoBehaviour
         lightOn.SetActive(false);
         lightDisable.SetActive(false);
         lightOff.SetActive(true);
+        if (!canControl)
+        {
+            ToggleFlashlight();
+        }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (canControl)
         {
-            activeSound.Play();
-            ToggleFlashlight();
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                activeSound.Play();
+                ToggleFlashlight();
+            }
         }
 
         if (isOn == false)
@@ -69,6 +77,7 @@ public class FlashlightController : MonoBehaviour
             isOn = false;
             SetLight();
         }
+
     }
 
     private void UpdateDuration()

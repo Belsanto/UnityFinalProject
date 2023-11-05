@@ -216,7 +216,7 @@ public class ReadNotes : MonoBehaviour
 
     private IEnumerator DestroyWithAnimation()
     {
-        float duration = 2f;
+        float duration = .7f;
         float currentTime = 0f;
         Vector3 initialScale = gameObject.transform.localScale;
         Vector3 targetScale = Vector3.zero;

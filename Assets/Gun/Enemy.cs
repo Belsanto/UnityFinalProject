@@ -11,9 +11,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float attackRange = 1.5f;
     [SerializeField] private float health = 50f;
     [SerializeField] private float timeToReactivate = 20f;
-    [SerializeField] private Image canvasImage; // Asegúrate de asignar esta variable desde el editor Unity
+    [SerializeField] private Image canvasImage;
 
-    private float Originalspeed;
+    private float originalSpeed;
     private bool isDead = false;
     private Transform player;
     private Vector3 initialPosition;
@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour
     private bool isStunned = false;
     private float stunTimer = 0f;
     private GameManager gameManager;
+    private Collider myCollider; // Referencia al collider que deseas desactivar
+
 
     [SerializeField] private AudioSource walkSound;
     [SerializeField] private AudioSource wakeUpSound;
@@ -36,21 +38,23 @@ public class Enemy : MonoBehaviour
         canvasImage.DOFade(0, .2f);
         initialPosition = transform.position;
         ownAnimator = GetComponent<Animator>();
-        Originalspeed = speed;
+        originalSpeed = speed;
         gameManager = GameManager.Instance;
-        walkSound.Play();
+        walkSound.Play(); // walkSound
+        
+        // Obtén el componente Collider adjunto a este GameObject
+        myCollider = GetComponent<Collider>();
     }
 
     void Update()
     {
-        
         if (isStunned)
         {
             stunTimer += Time.deltaTime;
-            if (stunTimer >= 1.5f) // Cambia el tiempo de estuneo según tus necesidades
+            if (stunTimer >= 1.5f)
             {
                 isStunned = false;
-                speed = Originalspeed; // Cambia la velocidad de recuperación según tus necesidades
+                speed = originalSpeed;
                 ownAnimator.SetFloat("speed", 1);
                 stunTimer = 0f;
             }
@@ -59,20 +63,22 @@ public class Enemy : MonoBehaviour
         if (!isDead)
         {
             float distance = Vector3.Distance(transform.position, player.position);
+
             if (distance < stoppingDistance && !isReturning)
             {
                 Vector3 direction = player.position - transform.position;
-                transform.LookAt(player);
+                transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+
                 if (distance > attackRange)
                 {
                     transform.Translate(Vector3.forward * Time.deltaTime * speed);
                     ownAnimator.SetFloat("speed", speed);
-                    // Reproducir sonido de caminar
+                    // Reproducir sonido de despertar
+                    wakeUpSound.Play();
                 }
                 else
                 {
-                    
-                    ownAnimator.SetTrigger("attack" + Random.Range(1, 4));
+                    ownAnimator.SetFloat("speed", 0);
                     StartCoroutine(AttackCoroutine());
                 }
             }
@@ -80,48 +86,67 @@ public class Enemy : MonoBehaviour
             {
                 isReturning = true;
                 ReturnToInitialPosition();
+
                 if (Vector3.Distance(transform.position, initialPosition) < 0.05f)
                 {
                     isReturning = false;
                     ownAnimator.SetFloat("speed", 0);
-                    
                 }
                 else
                 {
-                    transform.LookAt(initialPosition);
+                    Vector3 targetPosition = new Vector3(initialPosition.x, transform.position.y, initialPosition.z);
+                    transform.LookAt(targetPosition);
                     transform.Translate(Vector3.forward * Time.deltaTime * retreatSpeed);
                     ownAnimator.SetFloat("speed", retreatSpeed);
-                    // Reproducir sonido de caminar
+                    // Reproducir sonido de herida
+                    hurtSound.Play();
                 }
             }
         }
     }
+    
+    // Método para desactivar el Collider
+    private void DisableCollider()
+    {
+        if (myCollider != null) // Asegúrate de que el Collider no sea nulo
+        {
+            myCollider.enabled = false; // Desactiva el Collider
+        }
+    }
 
+    // Método para activar el Collider
+    private void EnableCollider()
+    {
+        if (myCollider != null) // Asegúrate de que el Collider no sea nulo
+        {
+            myCollider.enabled = true; // Activa el Collider
+        }
+    }
+    
     IEnumerator AttackCoroutine()
     {
-        yield return new WaitForSeconds(0.6f); // Ajusta el tiempo según tus necesidades
+        ownAnimator.SetTrigger("attack2");
+        yield return new WaitForSeconds(0.4f); // Ajusta el tiempo según tus necesidades
 
         if (!isDead && !isStunned)
         {
-            yield return new WaitForSeconds(0.6f); // Espera a que se complete el fade out
-            // lógica de ataque aquí
             Debug.Log("Golpe");
             if (gameManager.IncreaseHit())
             {
                 // Reproducir sonido de disparo
                 attackSound.Play();
-                Debug.Log("Attack Sound");
+                //Debug.Log("Attack Sound");
                 // Reproducir sonido de quejido del personaje
                 playerSound.Play();
-                Debug.Log("Player Sound");
+                //Debug.Log("Player Sound");
+                
+                // Realiza el fade out y el fade in de la imagen del canvas
+                canvasImage.DOFade(1, 1f).OnComplete(() =>
+                {
+                    canvasImage.DOFade(0, 0.2f);
+                });
             }
-            // Realiza el fade out y el fade in de la imagen del canvas
-
-
-            canvasImage.DOFade(1, 1f).OnComplete(() =>
-            {
-                canvasImage.DOFade(0, 0.2f);
-            });
+            
         }
     }
 
@@ -159,6 +184,7 @@ public class Enemy : MonoBehaviour
         
         initialPosition = transform.position; // Establece la nueva posición inicial como la posición actual
         ownAnimator.SetTrigger("death2");
+        DisableCollider();
         StartCoroutine(ReactivateAfterTime(timeToReactivate));
         // Reproducir sonido de muerte
         deathSound.Play();
@@ -183,6 +209,7 @@ public class Enemy : MonoBehaviour
         walkSound.Play();
         // Reproducir sonido de despertar
         Debug.Log("Wake Sound");
+        EnableCollider();
         wakeUpSound.Play();
     }
 }

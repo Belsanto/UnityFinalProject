@@ -384,7 +384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5874459508200997269, guid: 55cce4dce7f3bfd40a9664068e5bc940, type: 3}
       propertyPath: m_Pitch
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5874459508200997269, guid: 55cce4dce7f3bfd40a9664068e5bc940, type: 3}
       propertyPath: m_Volume
@@ -393,7 +393,7 @@ PrefabInstance:
     - target: {fileID: 5874459508200997269, guid: 55cce4dce7f3bfd40a9664068e5bc940, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: d65b81d6b848b467da29dab292d5ac66, type: 3}
+      objectReference: {fileID: 8300000, guid: 2aca1d9365e506941a170a0e9c823179, type: 3}
     - target: {fileID: 5874459508200997269, guid: 55cce4dce7f3bfd40a9664068e5bc940, type: 3}
       propertyPath: m_PlayOnAwake
       value: 1
@@ -530,6 +530,10 @@ PrefabInstance:
       propertyPath: typingAudio
       value: 
       objectReference: {fileID: 1869285911}
+    - target: {fileID: 8342980796156344339, guid: 55cce4dce7f3bfd40a9664068e5bc940, type: 3}
+      propertyPath: characterDelay
+      value: 0.0261
+      objectReference: {fileID: 0}
     - target: {fileID: 8342980796156344339, guid: 55cce4dce7f3bfd40a9664068e5bc940, type: 3}
       propertyPath: displayTextList.Array.size
       value: 7
