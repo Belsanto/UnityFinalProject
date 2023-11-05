@@ -1184,7 +1184,7 @@ MonoBehaviour:
   stoppingDistance: 4.5
   retreatSpeed: 1
   attackRange: 1.5
-  health: 50
+  health: 30
   timeToReactivate: 20
   canvasImage: {fileID: 1117259953}
   walkSound: {fileID: 622850867}
@@ -1438,7 +1438,7 @@ MonoBehaviour:
   stoppingDistance: 4.5
   retreatSpeed: 1
   attackRange: 1.5
-  health: 50
+  health: 30
   timeToReactivate: 20
   canvasImage: {fileID: 1117259953}
   walkSound: {fileID: 1067496702}
@@ -3348,7 +3348,7 @@ MonoBehaviour:
   stoppingDistance: 4.5
   retreatSpeed: 1
   attackRange: 1.5
-  health: 50
+  health: 30
   timeToReactivate: 20
   canvasImage: {fileID: 1117259953}
   walkSound: {fileID: 640040352}
@@ -7585,7 +7585,7 @@ MonoBehaviour:
   stoppingDistance: 4.5
   retreatSpeed: 1
   attackRange: 1.5
-  health: 50
+  health: 30
   timeToReactivate: 20
   canvasImage: {fileID: 1117259953}
   walkSound: {fileID: 2139201964}
@@ -18450,7 +18450,7 @@ MonoBehaviour:
   stoppingDistance: 4.5
   retreatSpeed: 1
   attackRange: 1.5
-  health: 50
+  health: 30
   timeToReactivate: 20
   canvasImage: {fileID: 1117259953}
   walkSound: {fileID: 1702649441}
@@ -23495,7 +23495,7 @@ MonoBehaviour:
   stoppingDistance: 4.5
   retreatSpeed: 1
   attackRange: 1.5
-  health: 50
+  health: 30
   timeToReactivate: 20
   canvasImage: {fileID: 1117259953}
   walkSound: {fileID: 1836238916}
@@ -25634,7 +25634,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: da8d3543641123841ad91c013e4ea706, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.663
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -25678,7 +25678,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.836
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -26322,7 +26322,7 @@ MonoBehaviour:
   stoppingDistance: 4.5
   retreatSpeed: 1
   attackRange: 1.5
-  health: 50
+  health: 30
   timeToReactivate: 20
   canvasImage: {fileID: 1117259953}
   walkSound: {fileID: 1352464262}
@@ -34535,7 +34535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1428201077507337666, guid: 3fdaf6e842da8b6488b15201c4f21a92, type: 3}
       propertyPath: bobbingAmount
-      value: 0.04
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 1428201077507337666, guid: 3fdaf6e842da8b6488b15201c4f21a92, type: 3}
       propertyPath: runningBobbingSpeed

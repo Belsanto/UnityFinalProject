@@ -25,5 +25,14 @@ public class MapController : MonoBehaviour
             zones.SetActive(enabled1);
             
         }
+        if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            var enabled1 = miniMapCamera.enabled;
+            enabled1 = !enabled1;
+            miniMapCamera.enabled = enabled1;
+            hud.SetActive(!enabled1);
+            zones.SetActive(enabled1);
+            
+        }
     }
 }
