@@ -83,7 +83,7 @@ public class TimeToLose : MonoBehaviour
     private void HandleGameEnd()
     {
         Debug.Log("¡Perdiste!"); // Muestra un mensaje en la consola
-        ShowEndGameMenu(); // Muestra el menú de fin de juego
+        if (!ShowEndGameMenu()) return; // Muestra el menú de fin de juego
         DisablePlayerLook(); // Deshabilita la capacidad del jugador para mirar
         SetCursorVisible(); // Muestra el cursor
         SetCursorLockState(); // Cambia el estado del bloqueo del cursor
@@ -91,9 +91,9 @@ public class TimeToLose : MonoBehaviour
     }
 
     // Muestra el menú de fin de juego
-    private void ShowEndGameMenu()
+    private bool ShowEndGameMenu()
     {
-        endGameMenu.GetComponent<MenuController>().SetLoseScreen(); // Activa la pantalla de perder en el menú de fin de juego
+        return endGameMenu.GetComponent<MenuController>().SetLoseScreen(); // Activa la pantalla de perder en el menú de fin de juego
     }
 
     // Deshabilita la capacidad del jugador para mirar
@@ -135,7 +135,7 @@ public class TimeToLose : MonoBehaviour
     // Reproduce el sonido de respiración apropiado según el tiempo restante
     private void PlayAppropriateBreathingSound()
     {
-        if (breathTime < (initialTime * 60) * 0.5f && (breathTime > (initialTime * 60) * 0.3f)) // Si el tiempo restante es menos del 60%
+        if (breathTime < (initialTime * 60) * 0.7f && (breathTime > (initialTime * 60) * 0.3f)) // Si el tiempo restante es menos del 60%
         {
             PlayNormalBreathing(); // Reproduce el sonido de respiración normal
         }

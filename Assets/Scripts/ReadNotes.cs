@@ -153,7 +153,7 @@ public class ReadNotes : MonoBehaviour
         {
             playableDirector.SetActive(true);
             Time.timeScale = 1;
-            //noteUI.GetComponent<MenuController>().SetWinScreen();
+            noteUI.GetComponent<MenuController>().SetWin();
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
 

@@ -1,15 +1,19 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class JumpScare : MonoBehaviour
 {
 
     [SerializeField] private GameObject jumpScareObject;
+    [SerializeField] private AudioSource sound;
 
     private AudioSource scareSound;
     public float fadeDuration = 1f;
-    public float inactiveDurantion = 1f;
+    public float inactiveDuration = 1f;
+    public float jumpScareDelay = 5f; // Agrega un retraso entre jump scares
+
+    private bool canTriggerJumpScare = true;
+
     private void Start()
     {
         scareSound = jumpScareObject.GetComponent<AudioSource>();
@@ -17,23 +21,30 @@ public class JumpScare : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && canTriggerJumpScare)
         {
-            jumpScareObject.SetActive(true);
-            jumpScareObject.GetComponent<Animation>().Play();
-            scareSound.Play();
-
-            StartFadeOut();
-            Invoke("SetInactive", inactiveDurantion);
+            StartCoroutine(TriggerJumpScare());
         }
     }
 
-
-    private void SetInactive()
+    IEnumerator TriggerJumpScare()
     {
-        jumpScareObject.SetActive(false);
-    }
+        canTriggerJumpScare = false;
 
+        jumpScareObject.SetActive(true);
+        jumpScareObject.GetComponent<Animation>().Play();
+        scareSound.Play();
+        sound.Play();
+        StartFadeOut();
+
+        yield return new WaitForSeconds(inactiveDuration);
+
+        jumpScareObject.SetActive(false);
+
+        yield return new WaitForSeconds(jumpScareDelay);
+
+        canTriggerJumpScare = true;
+    }
 
     public void StartFadeOut()
     {
@@ -56,6 +67,4 @@ public class JumpScare : MonoBehaviour
         scareSound.Stop();
         scareSound.volume = 1f;
     }
-
-
 }
