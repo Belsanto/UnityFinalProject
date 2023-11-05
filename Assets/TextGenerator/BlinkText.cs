@@ -8,12 +8,20 @@ public class BlinkText : MonoBehaviour
 {
 
     private TextMeshProUGUI text;
+    private TextMeshPro textMeshPro;
     private bool fadingIn;
     private bool fadingOut;
+    private bool usingTMP;
 
     private void Start()
     {
+        usingTMP = false;
         text = GetComponent<TextMeshProUGUI>();
+        if (text == null )
+        {
+            textMeshPro = GetComponent<TextMeshPro>();
+            usingTMP = true;
+        }
         fadingIn = true;
         fadingOut = false;
     }
@@ -21,20 +29,42 @@ public class BlinkText : MonoBehaviour
 
     private void Update()
     {
-        if (fadingIn)
-        {
-            fadingIn = false;
-            text.DOFade(0, 1f).OnComplete(() =>
-            fadingOut = true
-            );
-        }
 
-        if (fadingOut)
+        if (usingTMP)
         {
-            fadingOut = false;
-            text.DOFade(1, 1f).OnComplete(() =>
-            fadingIn = true
-            );
+            if (fadingIn)
+            {
+                fadingIn = false;
+                textMeshPro.DOFade(0, 1f).OnComplete(() =>
+                fadingOut = true
+                );
+            }
+
+            if (fadingOut)
+            {
+                fadingOut = false;
+                textMeshPro.DOFade(1, 1f).OnComplete(() =>
+                fadingIn = true
+                );
+            }
+        } else
+        {
+            if (fadingIn)
+            {
+                fadingIn = false;
+                text.DOFade(0, 1f).OnComplete(() =>
+                fadingOut = true
+                );
+            }
+
+            if (fadingOut)
+            {
+                fadingOut = false;
+                text.DOFade(1, 1f).OnComplete(() =>
+                fadingIn = true
+                );
+            }
+
         }
 
     }
