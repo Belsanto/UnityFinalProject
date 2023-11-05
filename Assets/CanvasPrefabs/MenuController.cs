@@ -20,6 +20,8 @@ public class MenuController : MonoBehaviour
     
     public bool isPaused = false;
     public bool isEnd { set; get; }
+    private bool isWin;
+    
 
     private void Start()
     {
@@ -69,7 +71,7 @@ public class MenuController : MonoBehaviour
         game.SetActive(true);
         ActiveEndBG(false, true);
         UnlockCursor(true);
-        SceneManager.LoadScene(0); // Replace '0' with the build index of your main menu scene
+        SceneManager.LoadScene(1); // Replace '0' with the build index of your main menu scene
     }
     public void TryAgain()
     {
@@ -83,8 +85,9 @@ public class MenuController : MonoBehaviour
         SceneManager.LoadScene(buildIndex);
     }
 
-    public void SetLoseScreen()
+    public bool SetLoseScreen()
     {
+        if (isWin) return false;
         ActiveEndBG(true, true);
         game.SetActive(false);
         camUI.enabled = true;
@@ -93,6 +96,7 @@ public class MenuController : MonoBehaviour
         win.SetActive(false);
         die.SetActive(true);
         UnlockCursor(true);
+        return true;
     }
 
     public void SetWinScreen()
@@ -130,5 +134,10 @@ public class MenuController : MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
+    }
+
+    public void SetWin()
+    {
+        isWin = true;
     }
 }

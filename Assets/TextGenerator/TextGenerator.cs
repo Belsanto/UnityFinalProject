@@ -12,7 +12,7 @@ public class TextGenerator : MonoBehaviour
     [SerializeField] private GameObject typingAudio;
     [SerializeField] private TextMeshProUGUI textComponent;
     [SerializeField] private List<string> displayTextList = new List<string>();
-    [SerializeField] private float characterDelay = 0.1f;
+    [Range(0.01f, 0.1f)][SerializeField] private float characterDelay = 0.1f;
     [SerializeField] private int buildIndex;
 
     private AudioSource audioS;
