@@ -111,7 +111,7 @@ MonoBehaviour:
   minIntensity: 0.25
   maxIntensity: 2
   flickerSpeed: 10
-  delayTime: 200
+  delayTime: 260
 --- !u!1 &522137411768455044
 GameObject:
   m_ObjectHideFlags: 0
