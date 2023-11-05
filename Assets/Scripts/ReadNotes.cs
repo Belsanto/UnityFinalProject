@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class ReadNotes : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class ReadNotes : MonoBehaviour
     [SerializeField] private GameObject dropSound;
     [SerializeField] private AudioSource pickUpCardSound;
     [SerializeField] private AudioSource dropCardSound;
+
+    [SerializeField] private GameObject playableDirector;
 
     private Renderer render;
 
@@ -41,6 +44,8 @@ public class ReadNotes : MonoBehaviour
         {
             noteUI.SetActive(false);
         }
+
+
 
         hud.SetActive(true);
         interact.SetActive(false);
@@ -141,20 +146,34 @@ public class ReadNotes : MonoBehaviour
         {
             playerMovement.SetIsAbleToLook(false);
             noteUI.SetActive(true);
+            StartCoroutine(CloseOpenNote(0.1f));
+
         }
         else
         {
-            noteUI.GetComponent<MenuController>().SetWinScreen();
+            playableDirector.SetActive(true);
+            Time.timeScale = 1;
+            //noteUI.GetComponent<MenuController>().SetWinScreen();
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
         }
 
         HandlePickUpSounds();
         hud.SetActive(false);
-        StartCoroutine(CloseOpenNote(0.1f));
+        //StartCoroutine(CloseOpenNote(0.1f));
 
         if (selectedItem != ItemOptions.Note)
         {
             GameManager.Instance.AcquireItem(selectedItem.ToString());
         }
+    }
+
+    public void ActivateWinScreen()
+    {
+        noteUI.GetComponent<MenuController>().SetWinScreen();
+        playableDirector.SetActive(false);
+        Time.timeScale = 0;
     }
 
     private void HandlePickUpSounds()
