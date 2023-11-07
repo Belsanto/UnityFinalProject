@@ -46,8 +46,14 @@ public class TimeToLose : MonoBehaviour
         UpdateTime(); // Actualiza el tiempo restante
         if (gameManager.IsDeath())
         {
-            HandleGameEnd(); // Maneja el final del juego si el jugador muere
+            StartCoroutine(StartDeath(.6f));
         }
+    }
+    
+    IEnumerator StartDeath(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        HandleGameEnd(); // Maneja el final del juego si el jugador muere
     }
 
     // Inicializa los componentes necesarios al inicio del juego
