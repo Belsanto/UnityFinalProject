@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class GameManager : MonoBehaviour
     private bool isImmune = false;
     private float immunityTime = 2f;
     private float lastHitTime = 0f;
+
+    // Slider de vida
+    [SerializeField] private Slider healthSlider; // Referencia al Slider de la interfaz de usuario
 
     public static GameManager Instance
     {
@@ -46,6 +50,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Notes = new bool[6] { false, false, false, false, false, false };
+        UpdateHealthSlider(); // Actualizar el slider al inicio
     }
 
     public void AcquireItem(string itemType)
@@ -71,6 +76,7 @@ public class GameManager : MonoBehaviour
         Notes = new bool[6] { false, false, false, false, false, false };
         itemsDictionary = new Dictionary<string, bool>();
         hitCount = 0;
+        UpdateHealthSlider(); // Actualizar el slider al reiniciar los ítems
     }
 
     // Función para establecer en true la posición indicada en el arreglo de notes
@@ -85,7 +91,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("La posición especificada está fuera del rango del arreglo de notes.");
         }
     }
-    
+
     public void ActivateNote(int posicion)
     {
         if (!GetNoteState(posicion))
@@ -106,6 +112,7 @@ public class GameManager : MonoBehaviour
             return false;
         }
     }
+
     public int TotalNotes()
     {
         int count = 0;
@@ -123,12 +130,24 @@ public class GameManager : MonoBehaviour
     {
         return (hitCount >= 5);
     }
+
+    // Función para actualizar el slider basado en la vida restante
+    public void UpdateHealthSlider()
+    {
+        if (healthSlider != null)
+        {
+            float healthValue = 1 - (float)hitCount / 5; // 5 es el máximo número de golpes permitidos
+            healthSlider.value = healthValue;
+        }
+    }
+
     public bool IncreaseHit()
     {
         if (Time.time - lastHitTime > immunityTime)
         {
             hitCount++;
             lastHitTime = Time.time;
+            UpdateHealthSlider(); // Llama a la función para actualizar el slider
             return true;
         }
 
